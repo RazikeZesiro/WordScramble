@@ -1,0 +1,113 @@
+<!-- Authors    : Jermaine Ramsay(2100471), Kimar Morgan(1403238), Mellicia Rowe(2101716), Zavier Jackson(2007906)
+	 Source     : index.html
+	 Description: Consists of webpage for Word Scramble game
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Word Scramble</title>
+		<script src="WordScramble_JavaScript.js"></script>
+		<link rel="stylesheet" href="WordScramble_VanillaCSS.css">
+	</head>
+	<body>
+		 <h1>&#129395; WORD SCRAMBLE &#129395;</h1>
+		<hr>
+		<form id="overall-form">
+			<table>
+				<tr>
+					<td style="width:40%;">
+						<fieldset  id = "registration-area">
+							<legend>Registration Area</legend>
+							<table>
+								<tr>
+									<td><label for="firstName">First Name:</label></td>
+									<td><input class="register-input" type="text" id="firstName" name="firstName" required minlength="3"></td>
+								</tr>
+								<tr>
+									<td><label for="lastName">Last Name:</label></td>
+									<td><input class="register-input" type="text" id="lastName" name="lastName" required minlength="3"></td>
+								</tr>
+								<tr>
+									<td><label for="dob">Date of Birth:</label></td>
+									<td><input class="register-input" type="date" id="dob" name="dob" required></td>
+								</tr>
+								<tr>
+									<td><label>Age:</label></td>
+									<td><input class="register-input" type="number" id= "age" name="age" readonly></td>
+								</tr>
+								<tr>
+									<td>Gender:</td>
+									<td>
+										<select class="registration" id="gender" name="gender" required> 
+											<option value="">--Please select--</option> 
+											<option value="male">Male</option> 
+											<option value="female">Female</option> 
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="email">Email:</label></td>
+									<td><input class="register-input" type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com$"></td>
+								</tr>
+							</table><br>
+							<button type="button" class="register-button" id="registerButton"   onclick="Register()">Register</button>
+							<button type="button" class="register-button" id="startButton"      onclick="PlayGame()" disabled>Start</button>
+							<button type="button" class="register-button" id="endButton"        onclick="findPercentageScore(true)" disabled>End</button>
+							<button type="button" class="register-button" id="percentageButton" onclick="findPercentageScore(false)" disabled>Show Percentage </button>
+						</fieldset>
+					</td>
+					<td style="width:20%;" class="arrow">
+						<!-- For 1st horizontal arrow -->
+						<img id="arrow1" src="Assets/arrow1.png" style="width:50%;" alt="arrow to play area" hidden>
+					</td>
+					<td style="width:40%;">
+						<fieldset id ="play-area" disabled>
+							<legend>Play Area</legend>
+							<label>Scrambled word:</label>
+							<input type="text" id="scrambled-word" size="10" disabled>
+							<br>
+							<span>Hint: </span>
+							<input type="text" id="hint" size="30" disabled><br><br>
+							<label for="answer">Enter a valid word:</label>
+							<input type="text" id="answer" name="answer"><br><br>
+							<button type="button" id="acceptButton" onclick="CheckAnswer()">Accept</button>
+							<button type="button" id="nextButton" onclick="PlayGame()">Next</button>
+						</fieldset>
+					</td>
+				</tr>
+				<tr style="height:160px;">
+					<td style="width:40%;" class="arrow">
+						<!-- For 1st vertical arrow -->
+						<img id="arrow4" src="Assets/arrow4.png" style="width:10%;" alt="arrow to registration area" hidden>
+					</td>
+					<td id="timer" style="width:20%;"></td>
+					<td style="width:40%;" class="arrow">
+						<!-- For 2nd vertical arrow -->
+						<img id="arrow2" src="Assets/arrow2.png" style="width:10%;" alt="arrow to result area" hidden>						
+					</td>				
+				</tr>
+				<tr>
+					<td style="width:40%;">
+						<fieldset id = "chart-area">
+							<legend>Chart Area</legend>
+								<div id="showcharts" ></div>
+						</fieldset>
+					</td>
+					<td style="width:20%;" class="arrow">
+						<!-- For 2nd horizontal arrow -->
+						<img id="arrow3" src="Assets/arrow3.png" style="width:50%;" alt="arrow to chart area" hidden>	
+					</td>
+					<td style="width:40%;">			
+						<fieldset id = "results-area">
+							<legend>Results Area</legend>
+							<textarea id="showpercentage" rows="10" cols="50" readonly></textarea><br><br>
+							<textarea id="showallplayers" readonly></textarea>
+						</fieldset>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

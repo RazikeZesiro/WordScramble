@@ -1,0 +1,72 @@
+/*
+Authors    : Jermaine Ramsay(2100471), Kimar Morgan(1403238), Mellicia Rowe(2101716), Zavier Jackson(2007906)
+Source     : WordScramble_VanillaCSS.css
+Description: Consists of styles of various HTML elements and classes
+*/
+
+body {
+	background-image: url('Assets/background.jpg');
+	background-size: cover;
+	background-position: center;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.register-input{
+	background-color: DeepSkyBlue;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+h1 {
+	font-size: 36px;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+legend {
+	border: 4px solid black;
+	border-radius: 5px;
+	font-size: 24px;
+	font-family: cursive;
+	font-weight: bold;
+	text-align: center;
+}
+fieldset{
+	border: 4px solid black;
+	border-radius: 30px;
+	width: 80%;
+	font-size: 19px;
+	margin: auto;
+}
+button[type="button"]{
+	padding: 10px;
+	border: none;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-family: "Georgia", Times, serif;
+}
+
+textarea{
+	display: block;
+	border-radius: 10px;
+	width: 300px;
+	margin: 0 auto;
+}
+input[type="text"] {
+	border: 1px solid black;
+	border-radius: 5px;
+	font-family: Arial, sans-serif;
+
+}
+.arrow, #timer, .bar_chart{
+	text-align: center;
+}
+.register-button{
+	text-align: center;
+}
