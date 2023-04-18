@@ -353,18 +353,18 @@ function showfreq() {
 		});
 
 		let genderTable = "<table class='bar_chart'><tr><th>Gender</th><th>Frequency</th></tr>";
-		genderTable += "<tr><td>Male</td><td><img src='thin_bar.png' height='20px' width='" + (maleCount / totalPlayers * 100) + "'></td></tr>";
-		genderTable += "<tr><td>Female</td><td><img src='thin_bar.png' height='20px' width='" + (femaleCount / totalPlayers * 100) + "'></td></tr>";
+		genderTable += "<tr><td>Male</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (maleCount / totalPlayers * 100) + "'></td></tr>";
+		genderTable += "<tr><td>Female</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (femaleCount / totalPlayers * 100) + "'></td></tr>";
 		// genderTable += "</table>";
 
 		let scoreTable = "<tr><th>Score Range</th><th>Frequency</th></tr>";
-		scoreTable += "<tr><td>&lt;50</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[0] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>50-59</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[1] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>60-69</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[2] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>70-79</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[3] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>80-89</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[4] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>90-99</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[5] / totalPlayers * 100) + "'></td></tr>";
-		scoreTable += "<tr><td>100</td><td><img src='thin_bar.png' height='20px' width='" + (scoreCounts[6] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>&lt;50</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[0] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>50-59</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[1] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>60-69</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[2] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>70-79</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[3] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>80-89</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[4] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>90-99</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[5] / totalPlayers * 100) + "'></td></tr>";
+		scoreTable += "<tr><td>100</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[6] / totalPlayers * 100) + "'></td></tr>";
 		scoreTable += "</table>";
 
 		document.getElementById("showcharts").innerHTML = genderTable + "<br>" + scoreTable;
