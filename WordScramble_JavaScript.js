@@ -1,25 +1,25 @@
 /*
-Authors    : Jermaine Ramsay(2100471), Kimar Morgan(1403238), Mellicia Rowe(2101716), Zavier Jackson(2007906)
+Authors    : Jermane Ramsay(2100471), Kimar Morgan(1403238), Mellicia Rowe(2101716), Zavier Jackson(2007906)
 Source     : WordScramble_JavaScript.js
-Description: Consists of functions to be called either when a HTML button element is clicked or from within another function
+Description: Consists of various JavaScript functions to be called
 */
 
 var PlayersData     = [];
 var question        = {};
-const today         = new Date();
-var timeLeft        = 10;
-var displayedArrows;
+const today         = new Date();						// Current date
+var timeLeft        = 10;								// Number of seconds to be displayed for game timer
+var displayedArrows;									// Number of arrow images that are visible on the webpage
 var randomWord;
 var gameTimer;
-let arrowTimer      = setInterval(toggleArrows, 500);	// toggleArrows() function will be called every 1/2 second once page loads
+let arrowTimer      = setInterval(toggleArrows, 500);	// toggleArrows() will be called every 1/2 second once page loads
 
-setInterval(showfreq,5000);								// showfreq() function will be called every 5 seconds once page loads
+setInterval(showfreq,5000);								// showfreq() will be called every 5 seconds once page loads
 
 // Author: Zavier Jackson
 // Called by "Register" Button
 function Register() {
-	displayedArrows = 0;						// Number of arrow images that are visible on th page
-	hideArrows();								// Hide all arrow images (also used to synch toggling)
+	displayedArrows = 0;								// No arrow images should be visible on the page
+	hideArrows();										// Hide all arrow images (also used to sync toggling)
 	var firstName = document.getElementById("firstName").value;
 	var lastName  = document.getElementById("lastName").value;
 	var dob       = document.getElementById("dob").value;
@@ -41,12 +41,10 @@ function Register() {
 
 	var birthDate = new Date(dob);
 	// The getFullYear() method returns a 4-digit number representing the full year of the specified date
-	var age = today.getFullYear() - birthDate.getFullYear();	// Stores difference between current year and birth year
+	var age = today.getFullYear() - birthDate.getFullYear();	// Difference between current year and birth year
 	// The getMonth() method for the Date object returns the month of a date as a zero-based index
-	var m = today.getMonth() - birthDate.getMonth();			// Stores difference between current month and birth month (from a zero-based index)
-	// If current month is before birth month OR (If birth month AND before birthday)
-	// m < 0 -> If current month is before birth month
-	// (m === 0 && today.getDate() < birthDate.getDate()) -> If current month is birth month but before birthday
+	var m = today.getMonth() - birthDate.getMonth();			// Difference between current month and birth month (zero-based indices)
+	// If current month is before birth month OR (If current month === birth month AND current day is before birthday)
 	if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
 		age--;
 	}
@@ -57,11 +55,11 @@ function Register() {
 		alert("Age must be between 8 and 12 inclusive.");
 		return;
 	}
-	if(gender === ""){				// If player does not select any gender
+	if(gender === ""){					// If player does not select any gender
 		alert("Select appropriate gender");
 		return;
 	}
-	if (email.indexOf("@gmail.com") == -1) {
+	if (!(email.endsWith("@gmail.com"))) {
 		alert("Email address must end with '@gmail.com'.");
 		return;
 	}
@@ -92,11 +90,10 @@ function Register() {
 	document.getElementById("endButton").disabled = false;		// "End" button is enabled
 	document.getElementById("startButton").disabled = false;	// "Start" button is enabled
 }
-
 // Author: Mellicia Rowe
 // Called by "Start" and "Next" Buttons
 function PlayGame(){
-	clearInterval(gameTimer);							// Stops game timer 
+	clearInterval(gameTimer);							// Stops game timer
 	// The following array is a list of words, one of which will be scrambled, and their definitions/hints that the player will use
 	// in helping to unscramble the word
 	let words = [
@@ -145,14 +142,14 @@ function PlayGame(){
 	var wordArray;
 
 	while(true){
-		randomWord = words[Math.floor(Math.random() * words.length)];	// Random array element is chosen from objects array words[]
+		randomWord = words[Math.floor(Math.random() * words.length)];		// Random word which is array element of array words[] is chosen
 		// Individual characters of array element's "word" property are split up as elements of a new array
 		wordArray = randomWord.word.split("");
 		for (let i = wordArray.length - 1; i > 0; i--) {					// Iterate through character elements
 			let j = Math.floor(Math.random() * (i + 1));
 			[wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];	// Randomize positions between two characters
 		}
-		// Stores 'true' or 'false' depending on if the "hint" property of the random word chosen
+		// The following will store either 'true' or 'false' depending on if the "hint" property of the random word chosen
 		// was previously recorded in a past question for the current player
 		let isStringInQuestions = PlayersData[PlayersData.length-1].questions.some(questionObj => questionObj.hint === randomWord.hint);
 		// Stores 'true' or 'false' depending on if scrambled word matches the random word chosen
@@ -165,15 +162,15 @@ function PlayGame(){
 	document.getElementById("hint").value = randomWord.hint;				// Hint of random word is assigned to "hint" textbox
 	question = {scrambledWord: wordArray.join(""), hint: randomWord.hint};	// Object storing scrambled word and random word hint is assigned
 
-	gameTimer = setInterval(StartTimer, 1000);								// StartTimer() function is set to be called per second
+	gameTimer = setInterval(StartTimer, 1000);								// StartTimer() is set to be called per second
 
 	if(displayedArrows === 0){												// If no arrows are currently being displayed
-		// Increment to 1 to let the first arrow be displayed the next time the toggleArrows() function is called according to an interval
-		displayedArrows++;													
+		// Increment to 1 to let the first arrow be displayed the next time toggleArrows() is called according to an interval
+		displayedArrows++;
 	}
 }
 
-// Author: Jermaine Ramsay
+// Author: Jermane Ramsay
 // Called every 1/2 second
 function toggleArrows() {
 	// Initially, all arrow images are hidden (seen in index.html) but the variable "displayedArrows"
@@ -183,10 +180,10 @@ function toggleArrows() {
 		const arrowId  = document.getElementById("arrow"+i);
 		// The hidden attribute of an arrow image will be assigned the opposite value of what it currently is.
 		// For instance, if it is currently storing 'true', then it will be assigned 'false' and vice versa
-		arrowId.hidden = !(arrowId.hidden);		
+		arrowId.hidden = !(arrowId.hidden);
 	}
 }
-// Author: Jermaine Ramsay
+// Author: Jermane Ramsay
 // Called by various functions to synchronize toggling of arrow images since they will not all be initially displayed simultaneously
 function hideArrows(){
 	// assignment chaining
@@ -199,7 +196,7 @@ function hideArrows(){
 // Called by PlayGame() where it is set to be called every second
 function StartTimer() {
 	// Text representing seconds enclosed with HTML tags will be displayed to speciifc HTML element with the id stated
-    document.getElementById("timer").innerHTML = "<h1>"+timeLeft+"</h1>";		
+    document.getElementById("timer").innerHTML = "<h1>"+timeLeft+"</h1>";
     if (timeLeft === 0) {
         document.getElementById("timer").innerHTML = "<h1>Time's up!</h1>";
         CheckAnswer();
@@ -227,8 +224,9 @@ function CheckAnswer(){
 		hideArrows();		    // To synchronize arrows the next time toggleArrows() is called
 	}
 
-	// "Accept" button is disabled to prevent player from attempting to provide multiple answers to the same
+	// "Accept" button and answer textfield is disabled to prevent player from attempting to provide multiple answers to the same
 	// question
+	document.getElementById("answer").disabled       = true;
 	document.getElementById("acceptButton").disabled = true;
 	// Object "question" which was assigned the scrambled word and a hint in PlayGame() is appended to "questions" array of current player
 	PlayersData[PlayersData.length-1].questions.push(question);
@@ -241,56 +239,56 @@ function CheckAnswer(){
 	} else{
 		alert("Sorry, the word is incorrect :(");
 	}
-	document.getElementById("answer").value = "";	// Resets answer field
+	document.getElementById("answer").value = "";					// Erases answer field
 	showAll();
 }
-// Author: Zavier Jackson
+// Author: Kimar Morgan
 // Called by various functions
 function calculateScore(Player){
 	const numOfQuestions = Player.questions.length;
+	// filter() method will return array object elements whose "isCorrect" property is 'true'
+	// then array length property will return the total number of those elements
 	const numOfCorrectAnswers = Player.answers.filter(answer => answer.isCorrect === true).length;
 	Player.percentageScore = parseFloat(numOfCorrectAnswers/numOfQuestions*100).toFixed(2);
 }
 // Author: Kimar Morgan
 // Called by "End" Button
 function findPercentageScore(disableControls){
-	if(disableControls){
-		clearInterval(gameTimer);
-		document.getElementById("overall-form").reset();
-		//document.getElementById("play-area").reset();
-		document.getElementById("play-area").disabled = true;
-		// Get all the buttons on the page
+	// The parameter "disableControls" will store either 'true' or 'false' based on the HTML button element being called
+	if(disableControls){										
+		clearInterval(gameTimer);								// Game timer will be cleared
+		document.getElementById("overall-form").reset();		// All fields on the webpage will be cleared
+		document.getElementById("play-area").disabled = true;	// Play Area will be disabled
+		// Get all the button elements on the webpage and stores as an array
 		const buttons = document.querySelectorAll("button");
 		// Loop through each button and disable all except for registerButton
 		buttons.forEach((button) => {
-			button.disabled = (button.id !== "registerButton" ? true : false);	//true/false
+			button.disabled = (button.id !== "registerButton" ? true : false);
 		});
-		displayedArrows = 4;
-		hideArrows();
+		displayedArrows = 4;									// All 4 arrow images will be displayed
+		hideArrows();											// To sync toggling of arrow images
 	}
 	const numOfQuestions = PlayersData[PlayersData.length-1].questions.length;
+	// filter() method will return array object elements whose "isCorrect" property is 'true'
+	// then array length property will return the total number of those elements
 	const numOfCorrectAnswers = PlayersData[PlayersData.length-1].answers.filter(answer => answer.isCorrect === true).length;
 	calculateScore(PlayersData[PlayersData.length-1]);
 
 	var output = "";
 
-	//var percentage = PlayersData[i].isCorrect ? 100 : 0;
 	output =  "Player Name    : " + PlayersData[PlayersData.length-1].firstName + " " + PlayersData[PlayersData.length-1].lastName + "\n";
 	output += "Date           : " + (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + "\n";
 	output += "# of questions : " + numOfQuestions + "\n";
-/*
-This is a JavaScript arrow function that takes a parameter answer and checks if the isCorrect property of the answer object is equal to true. It returns true if the condition is satisfied, and false otherwise.
-would return a new array containing only the 'answer' objects where 'isCorrect' is true
-*/
 	output += "# of correct answers: " + numOfCorrectAnswers + "\n";
 	output += "Percentage Score    : " + PlayersData[PlayersData.length-1].percentageScore + "%\n";
 
 	document.getElementById("showpercentage").value = output;
 
-	const registrationArea = document.getElementById("registration-area");
-
 	if(disableControls){
+		const registrationArea = document.getElementById("registration-area");
 		const formControls = registrationArea.querySelectorAll("input, select, button");
+		// All form controls in the registration-area will be disabled except for the
+		// "Start" and "End" buttons
 		formControls.forEach((control) => {
 			if (control.id !== "endButton" && control.id !== "startButton"){
 				control.disabled = false;
@@ -318,13 +316,13 @@ function showAll(){
 
 	document.getElementById("showallplayers").value = output;
 }
-// Author: Jermaine Ramsay
+// Author: Zavier Jackson
 // Called every 5 seconds
-function showfreq() {
+function showfreq(){
     let totalPlayers = PlayersData.length;
-    let maleCount = 0;
-    let femaleCount = 0;
-    let scoreCounts = [0, 0, 0, 0, 0, 0, 0];
+    let maleCount    = 0;
+    let femaleCount  = 0;
+    let scoreCounts  = [0, 0, 0, 0, 0, 0, 0];
 
 	if(totalPlayers !== 0){
 		PlayersData.forEach((player) => {
@@ -355,7 +353,6 @@ function showfreq() {
 		let genderTable = "<table class='bar_chart'><tr><th>Gender</th><th>Frequency</th></tr>";
 		genderTable += "<tr><td>Male</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (maleCount / totalPlayers * 100) + "'></td></tr>";
 		genderTable += "<tr><td>Female</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (femaleCount / totalPlayers * 100) + "'></td></tr>";
-		// genderTable += "</table>";
 
 		let scoreTable = "<tr><th>Score Range</th><th>Frequency</th></tr>";
 		scoreTable += "<tr><td>&lt;50</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[0] / totalPlayers * 100) + "'></td></tr>";
@@ -367,6 +364,6 @@ function showfreq() {
 		scoreTable += "<tr><td>100</td><td><img src='Assets/thin_bar.png' height='20px' width='" + (scoreCounts[6] / totalPlayers * 100) + "'></td></tr>";
 		scoreTable += "</table>";
 
-		document.getElementById("showcharts").innerHTML = genderTable + "<br>" + scoreTable;
+		document.getElementById("showcharts").innerHTML = genderTable + scoreTable;
 	}
 }
